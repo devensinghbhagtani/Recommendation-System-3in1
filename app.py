@@ -19,10 +19,12 @@ selected = option_menu(
 )
 
 if selected == "":
-    def fetch_poster(movie_title, year):
-        # response = requests.get('https://www.omdbapi.com/?i={}&apikey=3ac1a5bd'.format(movie_id))
-        response = requests.get('https://www.omdbapi.com/?t={}&y={}&apikey=3ac1a5bd'.format(movie_title, year))
+    def fetch_poster(movie_title, year, movie_id):
+        response = requests.get('https://www.omdbapi.com/?i={}&apikey=3ac1a5bd'.format(movie_id))
         data = response.json()
+        if 'Error' in data:
+            response = requests.get('https://www.omdbapi.com/?t={}&y={}&apikey=3ac1a5bd'.format(movie_title, year))
+            data = response.json()
         return data['Poster']
 
     def recommend(movie):
@@ -36,7 +38,7 @@ if selected == "":
         for i in movies_list:
             movie_id = movies.iloc[i[0]].title
             recommended_movies.append(movies.iloc[i[0]].title)
-            recommended_movies_posters.append(fetch_poster(movie_id, movies.iloc[i[0]].year ))
+            recommended_movies_posters.append(fetch_poster(movie_id, movies.iloc[i[0]].year, movies.iloc[i[0]].movie_id ))
         return recommended_movies, recommended_movies_posters
 
 
