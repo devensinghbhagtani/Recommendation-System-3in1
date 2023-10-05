@@ -18,8 +18,10 @@ selected = option_menu(
 
 )
 
+#Movie Recommendation Menu
 if selected == "":
     def fetch_poster(movie_title, year, movie_id):
+        #fetching poster link from omdb
         response = requests.get('https://www.omdbapi.com/?i={}&apikey=3ac1a5bd'.format(movie_id))
         data = response.json()
         if 'Error' in data:
@@ -28,7 +30,6 @@ if selected == "":
         return data['Poster']
 
     def recommend(movie):
-
         movie_index = movies[movies['title'] == movie].index[0]
         distances = similarity[movie_index]
         movies_list = sorted(list(enumerate(distances)), reverse=True, key=lambda x: x[1])[1:9]
@@ -71,6 +72,7 @@ if selected == "":
                     f'</div>',
                     unsafe_allow_html=True)
 
+#Music Recommendation Menu
 if selected == " ":
     def recommendmusic(music):
         music_index = songs[songs['music_name'] == music].index[0]
@@ -80,6 +82,7 @@ if selected == " ":
         recommended_music_posters = []
         print(selected_music_name)
         for i in music_list:
+            #The dataframe includes thumbnails' links, which have been scraped from YouTube using the respective API and seamlessly integrated
             recommended_music.append(songs.iloc[i[0]].music_name)
             recommended_music_posters.append(songs.iloc[i[0]].thumbnail)
         return(recommended_music, recommended_music_posters)
@@ -112,6 +115,7 @@ if selected == " ":
                     f'</div>',
                     unsafe_allow_html=True)
 
+#Book Recommendation Menu
 if selected == "  ":
     def recommend_book(book_name):
         index = np.where(pt.index == book_name)[0][0]
