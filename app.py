@@ -43,10 +43,10 @@ if selected == "":
         return recommended_movies, recommended_movies_posters
 
 
-    movies_dict = pickle.load(open('movie_dict.pkl', 'rb'))
+    movies_dict = pickle.load(open('Movie-Dict.pkl', 'rb'))
     movies = pd.DataFrame(movies_dict)
 
-    similarity = pickle.load(open('similarity.pkl', 'rb'))
+    similarity = pickle.load(open('MovieSimilarityMatrix.pkl', 'rb'))
     st.title('Movie Recommender')
     selected_movie_name = st.selectbox(
         'Select a Movie for Recommendations:',
@@ -87,9 +87,9 @@ if selected == " ":
             recommended_music_posters.append(songs.iloc[i[0]].thumbnail)
         return(recommended_music, recommended_music_posters)
 
-    music_dict = pickle.load(open('music_dict.pkl', 'rb'))
+    music_dict = pickle.load(open('Music-Dict.pkl', 'rb'))
     songs = pd.DataFrame(music_dict)
-    similaritymusic = pickle.load(open('similarmusic.pkl', 'rb'))
+    similaritymusic = pickle.load(open('MusicSimilarityMatrix.pkl', 'rb'))
 
     st.title('Music Recommender')
     selected_music_name = st.selectbox(
@@ -132,10 +132,10 @@ if selected == "  ":
             data.append(item)
         return data, data
 
-    pt_df = pickle.load(open('pt.pkl', 'rb'))
+    pt_df = pickle.load(open('BookTitle-UseridMatrix.pkl', 'rb'))
     pt = pd.DataFrame(pt_df)
-    similarity_score = pickle.load(open('similarity_score.pkl', 'rb'))
-    books_df = pickle.load(open('books.pkl', 'rb'))
+    similarity_score = pickle.load(open('BooksSimilarityMatrix.pkl', 'rb'))
+    books_df = pickle.load(open('Books-Dict.pkl', 'rb'))
     books = pd.DataFrame(books_df)
 
     st.title('Book Recommender')
